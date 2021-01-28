@@ -1,0 +1,6 @@
+[submodule "AmoaebaUtils"]
+	path = AmoaebaUtils
+	url = https://github.com/Celcius/AmoaebaUtils.git
+[submodule "LostFound/Assets/Packages"]
+	path = LostFound/Assets/Packages
+	url = https://github.com/Celcius/AmoaebaUtils.git
