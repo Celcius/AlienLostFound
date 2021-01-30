@@ -13,9 +13,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - NoCollision
+  - Items
+  - Button
   - 
   - 
   - 
@@ -38,6 +38,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: AlienLayer
+    uniqueID: 2825284001
+    locked: 0
+  - name: Background
+    uniqueID: 2286048479
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Items
+    uniqueID: 533074807
+    locked: 0
+  - name: Foreground
+    uniqueID: 2683870337
     locked: 0
