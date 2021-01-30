@@ -228,6 +228,7 @@ MonoBehaviour:
   pressButton: {fileID: 21300000, guid: 241363b678b835047be7f33d9bea4f9d, type: 3}
   buttonType: 1
   controller: {fileID: 0}
+  canPressButtons: {fileID: 11400000, guid: d2332d0914c13a347a7e7cd7bc6bea3e, type: 2}
 --- !u!58 &874133123266031625
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -664,6 +665,7 @@ MonoBehaviour:
   pressButton: {fileID: 21300000, guid: 7d977107a1bd62343a63acd41dee2763, type: 3}
   buttonType: 2
   controller: {fileID: 0}
+  canPressButtons: {fileID: 11400000, guid: d2332d0914c13a347a7e7cd7bc6bea3e, type: 2}
 --- !u!58 &4005212544378589040
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1082,6 +1084,7 @@ MonoBehaviour:
   pressButton: {fileID: 21300000, guid: 0135484cd924b1a43b862371382c4c4b, type: 3}
   buttonType: 0
   controller: {fileID: 0}
+  canPressButtons: {fileID: 11400000, guid: d2332d0914c13a347a7e7cd7bc6bea3e, type: 2}
 --- !u!58 &4200990883491724938
 CircleCollider2D:
   m_ObjectHideFlags: 0

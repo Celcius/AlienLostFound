@@ -40,17 +40,28 @@ public class GameController : MonoBehaviour
      private FloatVar angerBar;
 
      [SerializeField]
-     private Alien alien;
+     private AlienScriptArrVar alienPrefabs;
 
+     [SerializeField]
+     private BoolVar IsGameEnabled;
+
+
+    private Alien nextAlien;
+    private Alien currentAlien;
+
+    private bool hasStarted = false;
     private void Start() 
     {
+        IsGameEnabled.Value = false;
+        nextAlien = GenerateAlien();
         successes.Value = 0;
         failures.Value = 0;
+        angerBar.Value = 0;
         delivery.ClearArea();
         GrabbableItem[] items = CreateObjects(itemsToGenerate);
         instantiatedItems.Value = items;
+        translatorString.Value = "";
         GenerateColors(items);
-        NextAlien();
     }
 
     private string GeneratedString;
@@ -121,6 +132,7 @@ public class GameController : MonoBehaviour
     {
         if(delivery.Contains(chosenItem.Value))
         {
+            AnimateAlienLeave(Alien.AlienAnimations.LeaveHappy);
             successes.Value++;
             Debug.Log("Success");
         }
@@ -133,22 +145,38 @@ public class GameController : MonoBehaviour
         {
             DestroyItem(item);
         }
-
-        NextAlien();
     }
 
     private void OnFailure()
     {
+        AnimateAlienLeave(Alien.AlienAnimations.LeaveAngry);
         failures.Value++;
         Debug.Log("Failure");
+    }
+
+    private void AnimateAlienLeave(Alien.AlienAnimations animType)
+    {
+        translatorString.Value = "";
+        IsGameEnabled.Value = false;
+        currentAlien.Animate(animType,
+            () =>
+            {
+                NextAlien();
+            });
     }
     
     public void QuestionButton()
     {
-        angerBar.Value = Mathf.Clamp01(angerBar.Value + alien.AngerPerQuestion);
+
+        angerBar.Value = Mathf.Clamp01(angerBar.Value + currentAlien.AngerPerQuestion);
         if(!CheckAnger())
         {
-            GenerateTranslatorString();
+            translatorString.Value = "";
+            currentAlien.Animate(Alien.AlienAnimations.Talk, 
+                () => 
+                {
+                    GenerateTranslatorString();
+                });
         }
         
     }
@@ -162,10 +190,10 @@ public class GameController : MonoBehaviour
       
     public void RejectCustomer()
     {
-        NextAlien();
+        AnimateAlienLeave(Alien.AlienAnimations.LeaveHurt);
     }
 
-    private void ChooseNext()
+    private void ChooseNextItem()
     {
         angerBar.Value = 0;
         if(instantiatedItems.Value.Length == 0)
@@ -206,24 +234,60 @@ public class GameController : MonoBehaviour
 
     private bool CheckAnger()
     {
+        if(!IsGameEnabled.Value)
+        {
+            return false;
+        }
+        
         if(angerBar.Value >= 1.0f)
         {
+            IsGameEnabled.Value = false;
             OnFailure();
-            NextAlien();
+
             return true;
         }
         return false;
     }
     private void Update() 
     {
-        angerBar.Value = Mathf.Clamp01(angerBar.Value + alien.AngerPerSecond * Time.deltaTime);
-        CheckAnger();
+        if(!hasStarted)
+        {
+            NextAlien();
+            hasStarted = true;
+        }
+        
+        if(IsGameEnabled.Value)
+        {
+            angerBar.Value = Mathf.Clamp01(angerBar.Value + currentAlien.AngerPerSecond * Time.deltaTime);
+            CheckAnger();
+        }
     }
 
     private void NextAlien()
     {
-        ChooseNext();
-        angerBar.Value = 0;
-        GenerateTranslatorString();
+
+       currentAlien = nextAlien;
+       nextAlien = GenerateAlien();
+
+        currentAlien.Animate(Alien.AlienAnimations.MoveToFront,
+            () =>
+            {
+                ChooseNextItem();
+                angerBar.Value = 0;
+                currentAlien.Animate(Alien.AlienAnimations.Talk, 
+                () => 
+                {
+                    IsGameEnabled.Value = true;
+                    GenerateTranslatorString();
+                });
+            });
+        
+    }
+
+    private Alien GenerateAlien()
+    {
+        int index = UnityEngine.Random.Range(0,alienPrefabs.Value.Length);
+        Alien prefab = alienPrefabs.Value[index];
+        return Instantiate<Alien>(prefab, prefab.transform.position, prefab.transform.rotation);
     }
 }
