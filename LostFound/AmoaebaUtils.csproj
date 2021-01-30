@@ -112,6 +112,7 @@
      <Compile Include="Assets\Packages\AmoaebaUtils\GameplayUtils\PhysicsAnimationCurve.cs" />
      <Compile Include="Assets\Packages\AmoaebaUtils\Core\DisableOnBoolVar.cs" />
      <Compile Include="Assets\Packages\AmoaebaUtils\Core\StructUtils.cs" />
+     <Compile Include="Assets\Packages\AmoaebaUtils\ScriptableObjectUtils\ScriptVar\LayerMaskVar.cs" />
      <Compile Include="Assets\Packages\AmoaebaUtils\ScriptableObjectUtils\ScriptVar\ApplyForceToBody2DOnCollision.cs" />
      <Compile Include="Assets\Packages\AmoaebaUtils\GameplayUtils\InstantiateOnCollision.cs" />
      <Compile Include="Assets\Packages\AmoaebaUtils\GameplayUtils\DisableOnCollision.cs" />
@@ -135,7 +136,10 @@
      <Compile Include="Assets\Packages\AmoaebaUtils\ScriptableObjectUtils\ScriptVar\RegisterComponentVar.cs" />
      <Compile Include="Assets\Packages\AmoaebaUtils\Core\SceneTransitionHandler.cs" />
      <Compile Include="Assets\Packages\AmoaebaUtils\GameplayUtils\TransformMovement.cs" />
-     <Compile Include="Assets\Packages\AmoaebaUtils\ScriptableObjectUtils\ScriptVar\LayerMaskVar.cs" />
+     <Compile Include="Assets\Packages\AmoaebaUtils\Core\AnimateTextOnChange.cs" />
+     <Compile Include="Assets\Packages\AmoaebaUtils\Core\AnimateTextOnIntVarChange.cs" />
+     <Compile Include="Assets\Packages\AmoaebaUtils\Core\AnimateTextOnFloatVarChange.cs" />
+     <Compile Include="Assets\Packages\AmoaebaUtils\Core\AnimateTextOnStringVarChange.cs" />
      <None Include="Assets\Packages\AmoaebaUtils\AmoaebaUtils.asmdef" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.14f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -332,8 +336,20 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.14f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Google.GData.AccessControl">
+        <HintPath>D:/OneDrive/Ivo Capelo/Projects/GGJ21/LostFound/Assets/Packages/AmoaebaUtils/GoogleExporter/Google Sheets to Unity/Scripts/v3/Plugins/Google.GData.AccessControl.DLL</HintPath>
+    </Reference>
     <Reference Include="Google.GData.Client">
         <HintPath>D:/OneDrive/Ivo Capelo/Projects/GGJ21/LostFound/Assets/Packages/AmoaebaUtils/GoogleExporter/Google Sheets to Unity/Scripts/v3/Plugins/Google.GData.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Documents">
+        <HintPath>D:/OneDrive/Ivo Capelo/Projects/GGJ21/LostFound/Assets/Packages/AmoaebaUtils/GoogleExporter/Google Sheets to Unity/Scripts/v3/Plugins/Google.GData.Documents.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Extensions">
+        <HintPath>D:/OneDrive/Ivo Capelo/Projects/GGJ21/LostFound/Assets/Packages/AmoaebaUtils/GoogleExporter/Google Sheets to Unity/Scripts/v3/Plugins/Google.GData.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.GData.Spreadsheets">
+        <HintPath>D:/OneDrive/Ivo Capelo/Projects/GGJ21/LostFound/Assets/Packages/AmoaebaUtils/GoogleExporter/Google Sheets to Unity/Scripts/v3/Plugins/Google.GData.Spreadsheets.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
         <HintPath>D:/OneDrive/Ivo Capelo/Projects/GGJ21/LostFound/Assets/Packages/AmoaebaUtils/GoogleExporter/Google Sheets to Unity/Scripts/v3/Plugins/Newtonsoft.Json.dll</HintPath>
@@ -341,29 +357,17 @@
     <Reference Include="TinyJSON">
         <HintPath>D:/OneDrive/Ivo Capelo/Projects/GGJ21/LostFound/Assets/Packages/AmoaebaUtils/GoogleExporter/Google Sheets to Unity/Scripts/v3/Plugins/TinyJSON.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe">
-        <HintPath>D:/OneDrive/Ivo Capelo/Projects/GGJ21/LostFound/Assets/Packages/AmoaebaUtils/Persistance/Plugins/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Buffers">
+        <HintPath>D:/OneDrive/Ivo Capelo/Projects/GGJ21/LostFound/Assets/Packages/AmoaebaUtils/Persistance/Plugins/System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Memory">
         <HintPath>D:/OneDrive/Ivo Capelo/Projects/GGJ21/LostFound/Assets/Packages/AmoaebaUtils/Persistance/Plugins/System.Memory.dll</HintPath>
     </Reference>
-    <Reference Include="System.Buffers">
-        <HintPath>D:/OneDrive/Ivo Capelo/Projects/GGJ21/LostFound/Assets/Packages/AmoaebaUtils/Persistance/Plugins/System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.GData.AccessControl">
-        <HintPath>D:/OneDrive/Ivo Capelo/Projects/GGJ21/LostFound/Assets/Packages/AmoaebaUtils/GoogleExporter/Google Sheets to Unity/Scripts/v3/Plugins/Google.GData.AccessControl.DLL</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+        <HintPath>D:/OneDrive/Ivo Capelo/Projects/GGJ21/LostFound/Assets/Packages/AmoaebaUtils/Persistance/Plugins/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions">
         <HintPath>D:/OneDrive/Ivo Capelo/Projects/GGJ21/LostFound/Assets/Packages/AmoaebaUtils/Persistance/Plugins/System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.GData.Extensions">
-        <HintPath>D:/OneDrive/Ivo Capelo/Projects/GGJ21/LostFound/Assets/Packages/AmoaebaUtils/GoogleExporter/Google Sheets to Unity/Scripts/v3/Plugins/Google.GData.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.GData.Documents">
-        <HintPath>D:/OneDrive/Ivo Capelo/Projects/GGJ21/LostFound/Assets/Packages/AmoaebaUtils/GoogleExporter/Google Sheets to Unity/Scripts/v3/Plugins/Google.GData.Documents.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.GData.Spreadsheets">
-        <HintPath>D:/OneDrive/Ivo Capelo/Projects/GGJ21/LostFound/Assets/Packages/AmoaebaUtils/GoogleExporter/Google Sheets to Unity/Scripts/v3/Plugins/Google.GData.Spreadsheets.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.14f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

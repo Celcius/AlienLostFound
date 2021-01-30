@@ -84,10 +84,13 @@ public class GameController : MonoBehaviour
 
     [SerializeField]
     private Animator electricityAnim;
-    
+
+    [SerializeField]
+    private GameObject shutterObject;
 
     private void Start() 
     {
+        itemPrefabs.Reset();
         isFailureFaker = new bool[3]{false, false, false};
         IsGameEnabled.Value = false;
         nextAlien = GenerateAlien();
@@ -179,7 +182,7 @@ public class GameController : MonoBehaviour
         {
             OnFailure(Alien.AlienAnimations.LeaveHappy, true);
         }
-        else if(delivery.Contains(chosenItem.Value))
+        else if(delivery.ContainsSimilar(chosenItem.Value))
         {
             AnimateAlienLeave(Alien.AlienAnimations.LeaveHappy);
             successes.Value++;
@@ -243,7 +246,7 @@ public class GameController : MonoBehaviour
 
         if(instantiatedItems.Count() <= 0)
         {
-            EndDay();
+            EndDay(true);
         }
     }
       
@@ -284,13 +287,36 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void EndDay()
+    private void EndDay(bool shiftEnd = false)
     {
+        if(dayEnded)
+        {
+            return;
+        }
 
         dayEnded = true;
         IsGameEnabled.Value = false;
-        SceneManager.LoadScene(0, LoadSceneMode.Single);
+
+        shutterObject.SetActive(true);
+        string[] firedStr = new string[] 
+        {
+            "Three Strikes!\nYou're Fired!",
+            "Congrats!\nYou're Fired",
+            "Get your stuff kid...\nYou're Fired!",
+        };
+        int firedIndex = Random.Range(0, firedStr.Length);
+
+        translatorString.Value = shiftEnd? "Congrats, done the day!" : firedStr[firedIndex];
+
+        StartCoroutine(WaitForTime());
+
         Debug.Log("Day Ended");
+    }
+
+    private IEnumerator WaitForTime()
+    {
+        yield return new WaitForSeconds(10.0f);
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 
     private void GenerateTranslatorString()
@@ -312,22 +338,34 @@ public class GameController : MonoBehaviour
     private string CreateItemString(ObjectShape[] shapes, ObjectColor[] colors)
     {
         string format = currentAlien.GetTextFormat();
-        
-        int shapeIndex = Random.Range(0, shapes.Length);
+        List<int> indexes = new List<int>();
+        for(int i = 0; i < shapes.Length; i++)
+        {
+            indexes.Add(i);
+        }
+        int shapeIndex = indexes[Random.Range(0, indexes.Count)];
+        indexes.RemoveAt(shapeIndex);
+        int shapeIndex2 = indexes[Random.Range(0, indexes.Count)];
         int colorIndex = Random.Range(0, colors.Length);
 
         string shapeStr = ObjectType.ShapeNameFromType(shapes[shapeIndex]);
+        string shapeStr2 = ObjectType.ShapeNameFromType(shapes[shapeIndex2]);
         string colorStr = ObjectType.ColorNameFromType(colors[colorIndex]);
 
         shapeStr = currentAlien.JumbleText? 
                    UnityEngineUtils.CreateAnagram(shapeStr) :
                    shapeStr;
 
+        shapeStr2 = currentAlien.JumbleText? 
+            UnityEngineUtils.CreateAnagram(shapeStr2) :
+            shapeStr2;
+
         colorStr = currentAlien.JumbleText? 
                    UnityEngineUtils.CreateAnagram(colorStr) :
                    colorStr;
 
-        return string.Format(format, shapeStr, colorStr);
+
+        return string.Format(format, shapeStr, shapeStr2, colorStr);
     }
 
 

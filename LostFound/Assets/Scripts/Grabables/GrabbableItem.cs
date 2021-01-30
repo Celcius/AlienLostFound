@@ -186,4 +186,36 @@ public class GrabbableItem : MonoBehaviour
         Color spriteColor = new Color(color.r, color.g, color.b, sprite.color.a);
         sprite.color = spriteColor;
     }
+
+    public bool Similar(GrabbableItem item)
+    {
+        HashSet<ObjectColor> theirColors = new HashSet<ObjectColor>(item.colors);
+        HashSet<ObjectShape> theirShapes = new HashSet<ObjectShape>(item.shapes);
+
+        HashSet<ObjectColor> myColors = new HashSet<ObjectColor>(colors);
+        HashSet<ObjectShape> myShapes = new HashSet<ObjectShape>(shapes);
+
+        if(theirColors.Count != myColors.Count && theirShapes.Count != myShapes.Count)
+        {
+            return false;
+        }
+
+        foreach(ObjectColor color in theirColors)
+        {
+            if(!myColors.Contains(color))
+            {
+                return false;
+            }
+        }
+
+        foreach(ObjectShape shape in theirShapes)
+        {
+            if(!myShapes.Contains(shape))
+            {
+                return false;
+            }
+        }
+
+        return true;        
+    }
 }

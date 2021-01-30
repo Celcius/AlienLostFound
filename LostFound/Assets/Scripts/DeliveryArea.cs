@@ -41,13 +41,21 @@ public class DeliveryArea : MonoBehaviour
         items.Remove(item);
     }
 
-    public bool Contains(GrabbableItem item)
+    public bool ContainsSimilar(GrabbableItem item)
     {
         if(item == null)
         {
             return false;
         }
-        return items.Contains(item);
+
+        foreach(GrabbableItem toDeliver in items)
+        {
+            if(toDeliver.Similar(item))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public bool ContainsAny()

@@ -52,20 +52,36 @@ public class MaskOutlinedObjects : MonoBehaviour {
     }
 
 	void OnEnable() {
+        
+        if(!shaderMask)
+        {
+            Debug.LogError("shaderMask not packed");
+            return;
+        }
+
 		if(!shaderMask || !shaderMask.isSupported) {
+            Debug.LogError("shaderMask not supported");
 			enabled = false;
 			return;
 		}
 
         if (!SystemInfo.supportsImageEffects)
         {
+            Debug.LogError("system doesnt support image effects");
             enabled = false;
+            return;
+        }
+
+                if(!shaderRender)
+        {
+            Debug.LogError("shaderRender not packed");
             return;
         }
         
         // Disable the image effect if the shader can't run on the users graphics card
         if (!shaderRender || !shaderRender.isSupported)
         {
+            Debug.LogError("shaderRender not supported");
             enabled = false;
             return;
         }

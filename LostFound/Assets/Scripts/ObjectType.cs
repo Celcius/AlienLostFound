@@ -38,17 +38,25 @@ public enum ObjectColor
 
 public enum ObjectShape
 {
-    Spikey,
-    Square,
-    Pointy,
-    Soft,
-    Hard,
+    Boxey,
+    Bitey,
+    Cilindrical,
     Circular,
-    Oval,
+    Fluffy,
+    Grabbable,
+    Grabby,
+    Hard,
+    Jingling,
+    Listening,
+    Rectangular,
+
+    Spikey,
     Triangular,
-    ManySides,
-    Flat,
-    Crescent,
+    Tasting,
+    TiedUp,
+    Wet,
+    Watching,
+    Closed,
 }
 
 [System.Serializable]
@@ -58,28 +66,60 @@ public static class ObjectType
     {
         switch(shape)
         {
-            case ObjectShape.Spikey:
-                return "Spikey";
-            case ObjectShape.Square:
-                return "Square";
-            case ObjectShape.Pointy:
-                return "Pointy";
-            case ObjectShape.Soft:
-                return "Soft";
-            case ObjectShape.Hard:
-                return "Hard";
+            case ObjectShape.Bitey:
+                return "Bitey";
+
+            case ObjectShape.Boxey:
+                return "Boxey";
+
+            case ObjectShape.Cilindrical:
+                return "Cilindrical";
+
             case ObjectShape.Circular:
                 return "Circular";
-            case ObjectShape.Oval:
-                return "Oval";
+
+            case ObjectShape.Fluffy:
+                return "Fluffy";
+
+            case ObjectShape.Grabbable:
+                return "Grabbable";
+                
+            case ObjectShape.Grabby:
+                return "Grabby";
+
+            case ObjectShape.Hard:
+                return "Hard";
+
+            case ObjectShape.Jingling:
+                return "Jingling";
+
+            case ObjectShape.Listening:
+                return "Listening";
+
+            case ObjectShape.Rectangular:
+                return "Rectangular";
+
+            case ObjectShape.Spikey:
+                return "Spikey";
+
+            case ObjectShape.Tasting:
+                return "Tasting";
+        
             case ObjectShape.Triangular:
                 return "Triangular";
-            case ObjectShape.ManySides:
-                return "ManySides";
-            case ObjectShape.Flat:
-                return "Flat";
-            case ObjectShape.Crescent:
-                return "Crescent";
+
+            case ObjectShape.TiedUp:
+                return "TiedUp";
+
+            case ObjectShape.Wet:
+                return "Wet";
+
+            case ObjectShape.Watching:
+                return "Watching";
+
+            case ObjectShape.Closed:
+                return "Closed";
+
             default:
                 Debug.LogError("Not Supposed to fall here " + shape);
                 return "CENSORED";
