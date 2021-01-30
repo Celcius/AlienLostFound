@@ -49,4 +49,9 @@ public class DeliveryArea : MonoBehaviour
         }
         return items.Contains(item);
     }
+
+    public bool ContainsAny()
+    {
+        return items.Count > 0;
+    }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using AmoaebaUtils;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class GameController : MonoBehaviour
     private BoxCollider2D[] spawnAreas;
 
     [SerializeField]
+    private BoxCollider2D respawnArea;
+
+    [SerializeField]
     private int maxSpawnPerArea = 3; 
 
     [SerializeField]
@@ -23,6 +27,9 @@ public class GameController : MonoBehaviour
 
     [SerializeField]
     private IntVar successes;
+
+    [SerializeField]
+    private IntVar fakerDiscovered;
 
     [SerializeField]
     private IntVar failures;
@@ -45,20 +52,51 @@ public class GameController : MonoBehaviour
      [SerializeField]
      private BoolVar IsGameEnabled;
 
+    [SerializeField]
+    private bool[] isFailureFaker;
+    public bool[] IsFailureFaker => isFailureFaker;
 
+    [SerializeField]
+    private Transform alienParent;
     private Alien nextAlien;
     private Alien currentAlien;
 
     private bool hasStarted = false;
+
+    private bool dayEnded = false;
+
+    private float elapsedTime = 0;
+    [SerializeField]
+    private float timeToSpawn = 20.0f;
+    [SerializeField]
+    private float timeToSpawnDecPerc = 0.95f;
+    [SerializeField]
+    private float minTimetoSpawn = 12.5f;
+
+    [SerializeField]
+    private float fakerOdds = 0.2f;
+
+    [SerializeField]
+    private SoundSystem soundSystem;
+
+    [SerializeField]
+    private AudioClip electricity;
+
+    [SerializeField]
+    private Animator electricityAnim;
+    
+
     private void Start() 
     {
+        isFailureFaker = new bool[3]{false, false, false};
         IsGameEnabled.Value = false;
         nextAlien = GenerateAlien();
         successes.Value = 0;
         failures.Value = 0;
+        fakerDiscovered.Value = 0;
         angerBar.Value = 0;
         delivery.ClearArea();
-        GrabbableItem[] items = CreateObjects(itemsToGenerate);
+        GrabbableItem[] items = CreateObjects(itemsToGenerate, spawnAreas);
         instantiatedItems.Value = items;
         translatorString.Value = "";
         GenerateColors(items);
@@ -66,17 +104,18 @@ public class GameController : MonoBehaviour
 
     private string GeneratedString;
 
-    private GrabbableItem[] CreateObjects(int amount)
+    private GrabbableItem[] CreateObjects(int amount, BoxCollider2D[] spawns)
     {
-        if(amount == 0 || spawnAreas.Length == 0)
+        if(amount == 0 || spawns.Length == 0)
         {
             Debug.LogError("Trying to create empty");
             return new GrabbableItem[0];
         }
-        amount = Mathf.Min(amount, spawnAreas.Length * maxSpawnPerArea);
+
+        amount = Mathf.Min(amount, spawns.Length * maxSpawnPerArea);
 
         List<int> areaSlots = new List<int>();
-        for(int i = 0; i < spawnAreas.Length; i++)
+        for(int i = 0; i < spawns.Length; i++)
         {
             for(int j = 0; j < maxSpawnPerArea; j++)
             {
@@ -92,7 +131,7 @@ public class GameController : MonoBehaviour
             int areaIndex = areaSlots[chosenIndex];
             areaSlots.Remove(chosenIndex);
 
-            retItems.Add(InstantiateGrabObject(spawnAreas[areaIndex].bounds));
+            retItems.Add(InstantiateGrabObject(spawns[areaIndex].bounds));
         }
 
         return retItems.ToArray();
@@ -130,7 +169,17 @@ public class GameController : MonoBehaviour
 
     public void DeliverItem()
     {
-        if(delivery.Contains(chosenItem.Value))
+        if(!delivery.ContainsAny())
+        {
+            OnFailure();
+            return;
+        }
+
+         if(chosenItem.Value == null)
+        {
+            OnFailure(Alien.AlienAnimations.LeaveHappy, true);
+        }
+        else if(delivery.Contains(chosenItem.Value))
         {
             AnimateAlienLeave(Alien.AlienAnimations.LeaveHappy);
             successes.Value++;
@@ -147,10 +196,15 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void OnFailure()
+    private void OnFailure(Alien.AlienAnimations leaveAnim = Alien.AlienAnimations.LeaveAngry, bool isFake = false)
     {
-        AnimateAlienLeave(Alien.AlienAnimations.LeaveAngry);
+        AnimateAlienLeave(leaveAnim);
+        isFailureFaker[failures.Value] = isFake;
         failures.Value++;
+        if(failures.Value == 3)
+        {
+            EndDay();
+        }
         Debug.Log("Failure");
     }
 
@@ -186,11 +240,26 @@ public class GameController : MonoBehaviour
         instantiatedItems.Remove(item);
         delivery.Remove(item);
         DestroyImmediate(item.gameObject);
+
+        if(instantiatedItems.Count() <= 0)
+        {
+            EndDay();
+        }
     }
       
     public void RejectCustomer()
     {
-        AnimateAlienLeave(Alien.AlienAnimations.LeaveHurt);
+        soundSystem.PlaySound(electricity, "Zap", true);
+        electricityAnim.SetTrigger("AnimateElectricity");
+        if(chosenItem.Value == null)
+        {
+            AnimateAlienLeave(Alien.AlienAnimations.LeaveHurt);
+            fakerDiscovered.Value++;
+        }
+        else
+        {
+            OnFailure(Alien.AlienAnimations.LeaveHurt);
+        }
     }
 
     private void ChooseNextItem()
@@ -201,36 +270,92 @@ public class GameController : MonoBehaviour
             EndDay();
             return;
         }
-        int chosenIndex = Random.Range(0, instantiatedItems.Value.Length);
-        chosenItem.Value = instantiatedItems.Value[chosenIndex];
+
+        float roll = Random.Range(0.0f,1.0f);
+        if(roll <= fakerOdds)
+        {
+            Debug.Log("ALien is FAKER -> " + roll);
+            chosenItem.Value = null;
+        }
+        else
+        {
+            int chosenIndex = Random.Range(0, instantiatedItems.Value.Length);
+            chosenItem.Value = instantiatedItems.Value[chosenIndex];
+        }
     }
 
     private void EndDay()
     {
+
+        dayEnded = true;
+        IsGameEnabled.Value = false;
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
         Debug.Log("Day Ended");
     }
 
     private void GenerateTranslatorString()
     {
+        string generatedString = "";
+
         if(chosenItem.Value == null)
         {
-            translatorString.Value = "";
+            generatedString = GenerateFakeString();
         }
+        else
+        {
+            generatedString = CreateItemString(chosenItem.Value.shapes, 
+                                               chosenItem.Value.colors);
+        }
+        translatorString.Value = generatedString;
+    }
 
-        ObjectShape[] shapes = chosenItem.Value.shapes;
-        ObjectColor[] colors = chosenItem.Value.colors;
-
-        string[] formats = {"I think it be {0} and {1}", 
-                            "It's like totally {0} and like {1}",
-                            "... {0} ... {1}...",
-                            "Gimme {0} ... maybe {1}"};
+    private string CreateItemString(ObjectShape[] shapes, ObjectColor[] colors)
+    {
+        string format = currentAlien.GetTextFormat();
         
         int shapeIndex = Random.Range(0, shapes.Length);
         int colorIndex = Random.Range(0, colors.Length);
-        int formatIndex = Random.Range(0, formats.Length);
-        
-        translatorString.Value = string.Format(formats[formatIndex], shapes[shapeIndex], colors[colorIndex]);
+
+        string shapeStr = ObjectType.ShapeNameFromType(shapes[shapeIndex]);
+        string colorStr = ObjectType.ColorNameFromType(colors[colorIndex]);
+
+        shapeStr = currentAlien.JumbleText? 
+                   UnityEngineUtils.CreateAnagram(shapeStr) :
+                   shapeStr;
+
+        colorStr = currentAlien.JumbleText? 
+                   UnityEngineUtils.CreateAnagram(colorStr) :
+                   colorStr;
+
+        return string.Format(format, shapeStr, colorStr);
     }
+
+
+    private string GenerateFakeString()
+    {
+        HashSet<ObjectShape> allShapes = new HashSet<ObjectShape>();
+        HashSet<ObjectColor> allColors = new HashSet<ObjectColor>();
+        
+        foreach(GrabbableItem item in instantiatedItems.Value)
+        {
+            foreach(ObjectShape shape in item.shapes)
+            {
+                allShapes.Add(shape);
+            }
+
+            foreach(ObjectColor color in item.colors)
+            {
+                allColors.Add(color);
+            }    
+        }
+
+        List<ObjectShape> finalShapes = new List<ObjectShape>(allShapes);
+        List<ObjectColor> finalColors = new List<ObjectColor>(allColors);
+        
+        return CreateItemString(finalShapes.ToArray(), finalColors.ToArray());
+
+    }
+
 
     private bool CheckAnger()
     {
@@ -250,6 +375,12 @@ public class GameController : MonoBehaviour
     }
     private void Update() 
     {
+        elapsedTime += Time.deltaTime;
+        if(elapsedTime > timeToSpawn)
+        {
+            SpawnSingleObject();
+            elapsedTime = 0;
+        }
         if(!hasStarted)
         {
             NextAlien();
@@ -263,8 +394,18 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void SpawnSingleObject()
+    {
+       CreateObjects(1, new BoxCollider2D[]{respawnArea});
+       timeToSpawn = Mathf.Max(timeToSpawn*timeToSpawnDecPerc, minTimetoSpawn);
+    }
+
     private void NextAlien()
     {
+       if(dayEnded)
+       {
+           return;
+       }
 
        currentAlien = nextAlien;
        nextAlien = GenerateAlien();
@@ -277,7 +418,7 @@ public class GameController : MonoBehaviour
                 currentAlien.Animate(Alien.AlienAnimations.Talk, 
                 () => 
                 {
-                    IsGameEnabled.Value = true;
+                    IsGameEnabled.Value = !dayEnded;
                     GenerateTranslatorString();
                 });
             });
@@ -286,8 +427,9 @@ public class GameController : MonoBehaviour
 
     private Alien GenerateAlien()
     {
+        IsGameEnabled.Value = false;
         int index = UnityEngine.Random.Range(0,alienPrefabs.Value.Length);
         Alien prefab = alienPrefabs.Value[index];
-        return Instantiate<Alien>(prefab, prefab.transform.position, prefab.transform.rotation);
+        return Instantiate<Alien>(prefab, prefab.transform.position, prefab.transform.rotation, alienParent);
     }
 }

@@ -41,6 +41,9 @@ TagManager:
   - name: AlienLayer
     uniqueID: 2825284001
     locked: 0
+  - name: Electricity
+    uniqueID: 1084928571
+    locked: 0
   - name: Background
     uniqueID: 2286048479
     locked: 0

@@ -120,9 +120,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  respawnArea: {fileID: 0}
   maxSpawnPerArea: 3
   itemsToGenerate: 9
   successes: {fileID: 11400000, guid: 52563d154d998c34e9d497fdae67deaf, type: 2}
+  fakerDiscovered: {fileID: 11400000, guid: e9927d611b0243945adaf90b34d6a2cd, type: 2}
   failures: {fileID: 11400000, guid: 393298425e5bda64d991cd4fe41fc1a2, type: 2}
   instantiatedItems: {fileID: 11400000, guid: 4a4aa23f21a78d045843a6e99e14053d, type: 2}
   delivery: {fileID: 0}
@@ -130,3 +132,8 @@ MonoBehaviour:
   angerBar: {fileID: 11400000, guid: 43a14e0e50a29674eac6bc1c5255dd95, type: 2}
   alienPrefabs: {fileID: 11400000, guid: c6af7bb0d7d4c514c87c988412d8f407, type: 2}
   IsGameEnabled: {fileID: 11400000, guid: d2332d0914c13a347a7e7cd7bc6bea3e, type: 2}
+  isFailureFaker: 
+  timeToSpawn: 20
+  timeToSpawnDecPerc: 0.95
+  minTimetoSpawn: 12.5
+  fakerOdds: 0.2

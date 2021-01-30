@@ -20,6 +20,25 @@ public class Alien : MonoBehaviour
     }
 
     [SerializeField]
+    private Sprite normalFace;
+
+    [SerializeField]
+    private Sprite happyFace;
+
+    [SerializeField]
+    private Sprite angryFace;
+
+    [SerializeField]
+    private Sprite talkFace;
+
+    
+    [SerializeField]
+    private Sprite shockFace;
+    
+    [SerializeField]
+    private SpriteRenderer face;
+
+    [SerializeField]
     [Range(0.02f,0.1f)]
     private float angerPerSecond = 0.1f;
     public float AngerPerSecond => angerPerSecond;
@@ -50,28 +69,36 @@ public class Alien : MonoBehaviour
     [SerializeField]
     private AudioClip[] happyClips;
 
-    private SpriteRenderer[] renderers;
+    [SerializeField]
+    private SpriteRenderer body;
 
-    private void Start() {
-        renderers = GetComponentsInChildren<SpriteRenderer>();
-        foreach(SpriteRenderer renderer in renderers)
-        {
-            renderer.sortingOrder = 0;
-        }
+    [SerializeField]
+    private bool jumbleText = true;
+    public bool JumbleText => jumbleText;
+
+    [SerializeField]
+    private string[] textFormats = new string[] 
+    {
+        "I think it be {0} and {1}", 
+        "It's like totally {0} and like {1}",
+        "... {0} ... {1}...",
+        "Gimme {0} ... maybe {1}"
+    };
+
+    private void Start() 
+    {
+        body.sortingOrder = 0;
+        face.sortingOrder = 1;
     }
 
     public void Animate(AlienAnimations animationType, Action endCallback = null)
     {
-        if(renderers == null)
-        {
-            renderers = GetComponentsInChildren<SpriteRenderer>();
-        }
-
         this.currentAnimationCallback = endCallback;
         switch(animationType)
         {
             case AlienAnimations.Idle:
                 currentAnimationCallback =  null;
+                face.sprite = normalFace;
                 break;
 
             case AlienAnimations.Talk:
@@ -83,21 +110,25 @@ public class Alien : MonoBehaviour
                 {
                     anim.SetTrigger("IsTalking");
                 }
+                face.sprite = talkFace;
                 break;
             case AlienAnimations.MoveToFront:
-                foreach(SpriteRenderer renderer in renderers)
-                {
-                    renderer.sortingOrder = 1;
-                }
+
+                body.sortingOrder = 2;
+                face.sortingOrder = 3;
                 anim.SetTrigger("MoveForward");
+                face.sprite = normalFace;
                 break;
             case AlienAnimations.LeaveAngry:
+                face.sprite = angryFace;
                 anim.SetTrigger("LeaveAngry");
                 break;
             case AlienAnimations.LeaveHappy:
+            face.sprite = happyFace;
                 anim.SetTrigger("LeaveHappy");
                 break;
             case AlienAnimations.LeaveHurt:
+                face.sprite = shockFace;
                 anim.SetTrigger("LeaveHurt");
                 break;
         }
@@ -105,10 +136,8 @@ public class Alien : MonoBehaviour
 
     public void OnMoveEnd()
     {
-        foreach(SpriteRenderer renderer in renderers)
-        {
-            renderer.sortingOrder = 2;
-        }
+        body.sortingOrder = 4;
+        face.sortingOrder = 5;
         currentAnimationCallback?.Invoke();
     }
 
@@ -159,5 +188,16 @@ public class Alien : MonoBehaviour
     private void OnLeft()
     {
         Destroy(this.gameObject);
+    }
+
+    public string GetTextFormat()
+    {
+        if(textFormats.Length == 0)
+        {
+            return "UNINTELLIGEABLE {0} UNINTELLIGEABLE {1}!?";
+        }
+
+        int index = UnityEngine.Random.Range(0, textFormats.Length);
+        return textFormats[index];
     }
 }

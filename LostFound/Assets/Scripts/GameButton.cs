@@ -38,6 +38,11 @@ public class GameButton : MonoBehaviour
         OnPressableChange(false, canPressButtons.Value);
     }
 
+    private void OnDestroy() 
+    {
+        canPressButtons.OnChange -= OnPressableChange;    
+    }
+
     private void OnPressableChange(bool oldVal, bool newVal)
     {
         outlined.enabled = newVal;
