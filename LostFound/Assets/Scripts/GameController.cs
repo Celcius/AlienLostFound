@@ -132,7 +132,7 @@ public class GameController : MonoBehaviour
         {
             int chosenIndex = UnityEngine.Random.Range(0, areaSlots.Count);
             int areaIndex = areaSlots[chosenIndex];
-            areaSlots.Remove(chosenIndex);
+            areaSlots.RemoveAt(chosenIndex);
 
             retItems.Add(InstantiateGrabObject(spawns[areaIndex].bounds));
         }
@@ -171,7 +171,7 @@ public class GameController : MonoBehaviour
 
 
     public void DeliverItem()
-    {
+    { 
         if(!delivery.ContainsAny())
         {
             OnFailure();
@@ -184,6 +184,7 @@ public class GameController : MonoBehaviour
         }
         else if(delivery.ContainsSimilar(chosenItem.Value))
         {
+            SetTranslatorString(currentAlien.GetHappyText());
             AnimateAlienLeave(Alien.AlienAnimations.LeaveHappy);
             successes.Value++;
             Debug.Log("Success");
@@ -201,6 +202,7 @@ public class GameController : MonoBehaviour
 
     private void OnFailure(Alien.AlienAnimations leaveAnim = Alien.AlienAnimations.LeaveAngry, bool isFake = false)
     {
+        SetTranslatorString(currentAlien.GetFakerText());
         AnimateAlienLeave(leaveAnim);
         isFailureFaker[failures.Value] = isFake;
         failures.Value++;
@@ -213,13 +215,35 @@ public class GameController : MonoBehaviour
 
     private void AnimateAlienLeave(Alien.AlienAnimations animType)
     {
-        translatorString.Value = "";
+        SetTranslatorString("");
+        switch(animType)
+        {
+            case Alien.AlienAnimations.LeaveAngry:
+                SetTranslatorString(currentAlien.GetAngryText());
+                break;
+
+            case Alien.AlienAnimations.LeaveHappy:
+                break;
+
+            case Alien.AlienAnimations.LeaveHurt:
+                SetTranslatorString(currentAlien.GetPainText());
+                break;
+
+            default:
+                break;
+        }
         IsGameEnabled.Value = false;
         currentAlien.Animate(animType,
             () =>
             {
+                SetTranslatorString("");
                 NextAlien();
             });
+    }
+
+    private void SetTranslatorString(string newStr)
+    {
+        translatorString.Value = newStr;       
     }
     
     public void QuestionButton()
@@ -228,7 +252,7 @@ public class GameController : MonoBehaviour
         angerBar.Value = Mathf.Clamp01(angerBar.Value + currentAlien.AngerPerQuestion);
         if(!CheckAnger())
         {
-            translatorString.Value = "";
+            SetTranslatorString("");
             currentAlien.Animate(Alien.AlienAnimations.Talk, 
                 () => 
                 {
@@ -256,6 +280,7 @@ public class GameController : MonoBehaviour
         electricityAnim.SetTrigger("AnimateElectricity");
         if(chosenItem.Value == null)
         {
+            SetTranslatorString(currentAlien.GetPainText());
             AnimateAlienLeave(Alien.AlienAnimations.LeaveHurt);
             fakerDiscovered.Value++;
         }
@@ -306,7 +331,7 @@ public class GameController : MonoBehaviour
         };
         int firedIndex = Random.Range(0, firedStr.Length);
 
-        translatorString.Value = shiftEnd? "Congrats, done the day!" : firedStr[firedIndex];
+        SetTranslatorString(shiftEnd? "Congrats, done the day!" : firedStr[firedIndex]);
 
         StartCoroutine(WaitForTime());
 
@@ -332,7 +357,7 @@ public class GameController : MonoBehaviour
             generatedString = CreateItemString(chosenItem.Value.shapes, 
                                                chosenItem.Value.colors);
         }
-        translatorString.Value = generatedString;
+        SetTranslatorString(generatedString);
     }
 
     private string CreateItemString(ObjectShape[] shapes, ObjectColor[] colors)
@@ -347,25 +372,37 @@ public class GameController : MonoBehaviour
         indexes.RemoveAt(shapeIndex);
         int shapeIndex2 = indexes[Random.Range(0, indexes.Count)];
         int colorIndex = Random.Range(0, colors.Length);
+        int colorIndex2 = colorIndex;
+        while(colorIndex2 == colorIndex && colors.Length > 1)
+        {
+            colorIndex2 = Random.Range(0, colors.Length);
+        } 
 
         string shapeStr = ObjectType.ShapeNameFromType(shapes[shapeIndex]);
-        string shapeStr2 = ObjectType.ShapeNameFromType(shapes[shapeIndex2]);
+        
         string colorStr = ObjectType.ColorNameFromType(colors[colorIndex]);
 
-        shapeStr = currentAlien.JumbleText? 
+        string bonusStr ="";
+
+        shapeStr = currentAlien.JumbleShape? 
                    UnityEngineUtils.CreateAnagram(shapeStr) :
                    shapeStr;
 
-        shapeStr2 = currentAlien.JumbleText? 
-            UnityEngineUtils.CreateAnagram(shapeStr2) :
-            shapeStr2;
-
-        colorStr = currentAlien.JumbleText? 
+        colorStr = currentAlien.JumbleColor? 
                    UnityEngineUtils.CreateAnagram(colorStr) :
                    colorStr;
+        
+        if(Random.Range(0,10) <= 5.0f || colorIndex  == colorIndex2)
+        {
+            bonusStr = ObjectType.ShapeNameFromType(shapes[shapeIndex2]);
 
+        }
+        else 
+        {
+            bonusStr = ObjectType.ColorNameFromType(colors[colorIndex2]);         
+        }
 
-        return string.Format(format, shapeStr, shapeStr2, colorStr);
+        return string.Format(format, shapeStr, bonusStr, colorStr);
     }
 
 

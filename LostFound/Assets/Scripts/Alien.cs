@@ -73,8 +73,12 @@ public class Alien : MonoBehaviour
     private SpriteRenderer body;
 
     [SerializeField]
-    private bool jumbleText = true;
-    public bool JumbleText => jumbleText;
+    private bool jumbleColor = true;
+    public bool JumbleColor => jumbleColor;
+
+    [SerializeField]
+    private bool jumbleShape = true;
+    public bool JumbleShape => jumbleShape;
 
     [SerializeField]
     private string[] textFormats = new string[] 
@@ -84,6 +88,19 @@ public class Alien : MonoBehaviour
         "... {0} ... {1}...",
         "Gimme {0} ... maybe {1}"
     };
+
+    [SerializeField]
+    private string[] happyTexts = new string[0];
+
+    [SerializeField]
+    private string[] angryTexts = new string[0];
+
+    [SerializeField]
+    private string[] painTexts = new string[0];
+
+    [SerializeField]
+    private string[] fakerTexts = new string[0];
+
 
     private void Start() 
     {
@@ -197,7 +214,38 @@ public class Alien : MonoBehaviour
             return "UNINTELLIGEABLE {0} UNINTELLIGEABLE {1}!?";
         }
 
-        int index = UnityEngine.Random.Range(0, textFormats.Length);
-        return textFormats[index];
+        return GetRandomText(textFormats);
+        
+    }
+
+    private string GetRandomText(string[] options)
+    {
+        if(options == null || options.Length == 0)
+        {
+            return "";
+        }
+
+        int index = UnityEngine.Random.Range(0, options.Length);
+        return options[index];
+    }
+
+    public string GetHappyText()
+    {
+        return GetRandomText(happyTexts);
+    }
+
+    public string GetAngryText()
+    {
+        return GetRandomText(angryTexts);
+    }
+
+    public string GetPainText()
+    {
+        return GetRandomText(painTexts);
+    }
+
+    public string GetFakerText()
+    {
+        return GetRandomText(fakerTexts);
     }
 }

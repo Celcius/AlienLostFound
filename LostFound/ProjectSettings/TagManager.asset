@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Space
+    uniqueID: 4106032785
+    locked: 0
   - name: AlienLayer
     uniqueID: 2825284001
     locked: 0

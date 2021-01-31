@@ -223,9 +223,9 @@ public static class ObjectType
                 case ObjectColor.Purple:
                     return "Purple";
                 case ObjectColor.NavyBlue:
-                    return "NavyBlue";
+                    return "Navy Blue";
                 case ObjectColor.PeaGreen:
-                    return "PeaGreen";
+                    return "Pea Green";
                 case ObjectColor.Gray:
                     return "Gray";
                 case ObjectColor.Orange:

@@ -1,0 +1,207 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6742295532488806288
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: jumbleText
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: jumbleColor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: jumbleShape
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: hurtClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: painTexts.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: talkClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: angryClips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: angryTexts.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: fakerTexts.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: happyClips.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: happyTexts.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: textFormats.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: hurtClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 777d6859ad681e84d8d7b3bd28fd651c, type: 3}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: painTexts.Array.data[0]
+      value: WAAAAAA!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: painTexts.Array.data[1]
+      value: AAATEE YUUUU
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: painTexts.Array.data[2]
+      value: MEEANNNIIIEEEE!!!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: talkClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: bfc4e89651fc75242bc643c72aaf0384, type: 3}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: talkClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4ef04f26014fe4e4987fa67b29db0dff, type: 3}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: angryClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 25383fa18b211b04d97062e00f867d99, type: 3}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: angryTexts.Array.data[0]
+      value: WOOOONGGG !
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: angryTexts.Array.data[1]
+      value: NYO NYO NYO!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: angryTexts.Array.data[2]
+      value: Dis no gud...
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: angryTexts.Array.data[3]
+      value: Iss gawwwnn!!!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: fakerTexts.Array.data[0]
+      value: HYE HYE HYE HYE
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: fakerTexts.Array.data[1]
+      value: '*Naughty Laugh*'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: fakerTexts.Array.data[2]
+      value: 'I Take '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: happyClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: c0659f090ea88a246b468ed2abf40447, type: 3}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: happyClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8b63bc75c366c1a448160ddc792214f6, type: 3}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: happyTexts.Array.data[0]
+      value: Dank Yuu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: happyTexts.Array.data[1]
+      value: Mineeeeeeee
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: happyTexts.Array.data[2]
+      value: Yeshhhh
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: happyTexts.Array.data[3]
+      value: D'aaawwww
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: happyTexts.Array.data[4]
+      value: Wub yuuuu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: textFormats.Array.data[0]
+      value: '{1} *Sob*  {2} *Sob*  {0} '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: textFormats.Array.data[1]
+      value: Find {0} {1} {2} pweety pwease!!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: textFormats.Array.data[2]
+      value: Want {0} want {1}  want {2}
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: textFormats.Array.data[3]
+      value: Where {1} {2} {0} ???
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216034, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: m_Name
+      value: Alien3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216039, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216039, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216039, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.23
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216039, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216039, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216039, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216039, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216039, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216039, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216039, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216039, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}

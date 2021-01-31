@@ -200,12 +200,34 @@ MonoBehaviour:
   happyClips:
   - {fileID: 8300000, guid: ba403349849d07b4bb4c16032b607591, type: 3}
   body: {fileID: 8244765006340216032}
-  jumbleText: 0
+  jumbleColor: 0
+  jumbleShape: 0
   textFormats:
   - My {0}, {1} and {2} is like tots' gone
-  - It's like totally {0}, tots'  {2} and like {1}
+  - It's like totally {0}, tots' {2} and like {1}...
   - '{2} and like {0} and like {1} yeaah!?'
   - ' I''m so sure {2} and {0}! Oh and  maaaaybe {1}'
+  happyTexts:
+  - Oh My GLORB! YASSSSSS!
+  - MYYY BAAAABYYYYY!!!!!
+  - YASSSS!
+  - 'Like THANKSSSSS!!! '
+  - Whatever, baaaiiiiiii
+  - Bitchin'
+  angryTexts:
+  - NO! GRODY!
+  - This is so not what i asked!
+  - NO! I want your manager!
+  - URGH! Seriously!?
+  painTexts:
+  - ARGGHHHHHHHHHHH!
+  - HEEEELLLLP!
+  - WHATEVER NERD!
+  fakerTexts:
+  - Psych!
+  - YOINK!
+  - Like, mine now baaiiiiiii!
+  - Like, no take backsies!
 --- !u!95 &8244765006340216038
 Animator:
   serializedVersion: 3

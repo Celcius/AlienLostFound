@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   setupValue:
   - {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+  - {fileID: 3457137269826657137, guid: 1a39bc5626448894b87e622f7df42122, type: 3}
+  - {fileID: 4248730969678048222, guid: a51127ef8ebd02844a8516bfc2a7063e, type: 3}
   value:
   - {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+  - {fileID: 3457137269826657137, guid: 1a39bc5626448894b87e622f7df42122, type: 3}
+  - {fileID: 4248730969678048222, guid: a51127ef8ebd02844a8516bfc2a7063e, type: 3}

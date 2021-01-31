@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 90b668a261cfa21449c651690f8f061a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 25935f4ff0381314c9a830b9b8dce2e5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 90b668a261cfa21449c651690f8f061a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 25935f4ff0381314c9a830b9b8dce2e5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -487,7 +487,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 90b668a261cfa21449c651690f8f061a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 25935f4ff0381314c9a830b9b8dce2e5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -529,13 +529,13 @@ RectTransform:
   - {fileID: 5913855813797261333}
   - {fileID: 91296655867336803}
   - {fileID: 9199417660794773761}
-  m_Father: {fileID: 7558216851097750982}
-  m_RootOrder: 2
+  m_Father: {fileID: 7558216850882218879}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 200, y: 213.66669}
-  m_SizeDelta: {x: -612, y: -547.3333}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -30, y: -19.999939}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3226340343126815775
 MonoBehaviour:
@@ -580,8 +580,8 @@ MonoBehaviour:
   - {fileID: 7701808079554935003}
   - {fileID: 1279364285790205082}
   failures: {fileID: 11400000, guid: 393298425e5bda64d991cd4fe41fc1a2, type: 2}
-  failSprite: {fileID: 21300000, guid: 90b668a261cfa21449c651690f8f061a, type: 3}
-  fakeSprite: {fileID: 21300000, guid: f622745fc4a597a43b944d9176cf436b, type: 3}
+  failSprite: {fileID: 21300000, guid: 25935f4ff0381314c9a830b9b8dce2e5, type: 3}
+  fakeSprite: {fileID: 21300000, guid: df72aa14018925d46bbc8acc3d92d63e, type: 3}
   controller: {fileID: 0}
 --- !u!1 &7558216849948983500
 GameObject:
@@ -620,7 +620,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.05, y: 1}
   m_AnchorMax: {x: 0.45, y: 1}
-  m_AnchoredPosition: {x: 0, y: -50}
+  m_AnchoredPosition: {x: 0, y: -5}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7558216849948983496
@@ -704,13 +704,14 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2592925867609166726}
   m_Father: {fileID: 7558216851097750982}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.7, y: 1}
   m_AnchorMax: {x: 0.8, y: 1}
-  m_AnchoredPosition: {x: -69, y: -50}
+  m_AnchoredPosition: {x: -69, y: -5}
   m_SizeDelta: {x: 138, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &7558216850882218872
@@ -797,7 +798,6 @@ RectTransform:
   m_Children:
   - {fileID: 7558216849948983503}
   - {fileID: 7558216850882218879}
-  - {fileID: 2592925867609166726}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -932,10 +932,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: asdasd asd asd asd sad as dasd asd 3 wefeferf 4
+  m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1e3da1f72095bf94185703515531d447, type: 2}
+  m_sharedMaterial: {fileID: 2908103272693350356, guid: 1e3da1f72095bf94185703515531d447, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -959,12 +959,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
+  m_fontSize: 15
   m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 1
-  m_fontSizeMin: 5
-  m_fontSizeMax: 18
+  m_fontSizeMin: 1
+  m_fontSizeMax: 25
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -995,7 +995,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 12, y: 40, z: 12, w: 8.5}
+  m_margin: {x: 12, y: 42.5, z: 12, w: 12}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
