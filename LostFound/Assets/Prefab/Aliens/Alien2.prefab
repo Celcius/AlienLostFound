@@ -7,10 +7,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7418589203326240365, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f66cc2d3543021f4390e6e9e69c21e4d, type: 3}
+    - target: {fileID: 8244765006340216032, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a91f32cdc28964b4d97517dad39b73ca, type: 3}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: talkFace
+      value: 
+      objectReference: {fileID: 21300000, guid: 2c1a770c31b23334895770358431aecc, type: 3}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: angryFace
+      value: 
+      objectReference: {fileID: 21300000, guid: 4832764debc02cd4e88411b3456907a0, type: 3}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: happyFace
+      value: 
+      objectReference: {fileID: 21300000, guid: f66cc2d3543021f4390e6e9e69c21e4d, type: 3}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: shockFace
+      value: 
+      objectReference: {fileID: 21300000, guid: 62b661ea2c2351744a73e2200d683296, type: 3}
     - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
       propertyPath: jumbleText
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: normalFace
+      value: 
+      objectReference: {fileID: 21300000, guid: 629ea94927892b241b738f0d13fbd7e6, type: 3}
     - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
       propertyPath: jumbleColor
       value: 0
@@ -18,6 +46,14 @@ PrefabInstance:
     - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
       propertyPath: jumbleShape
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: angerPerSecond
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
+      propertyPath: angerPerQuestion
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 8244765006340216033, guid: ab67327f3cf4f994bb601292d2fb1876, type: 3}
       propertyPath: hurtClips.Array.size

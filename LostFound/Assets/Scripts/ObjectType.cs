@@ -1,39 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AmoaebaUtils;
 
 public enum ObjectColor
 {
-    White,
-    Yellow,
-    Blue,
-    Red,
-    Green,
-    Black,
-    Brown,
-    Azure,
-    Ivory,
-    Teal,
-    Purple,
-    NavyBlue,
-    PeaGreen,
-    Gray,
-    Orange,
-    Maroon,
-    Charcoal,
-    Aquamarine,
-    Coral,
-    Fuchsia,
-    Wheat,
-    Lime,
-    Crimson,
-    Khaki,
-    Pink,
-    HotPink,
-    Magenta,
+    Apple,
+    Raspberry,
+    Bubblegum,
+    Lavender,
     Plum,
-    Olive,
-    Cyan
+    Saphire,
+    Azure,
+    Sky,
+    Aquamarine,
+    Emerald,
+    Forest,
+    Lime,
+    Lemon,
+    Mustard,
+    Apricot,
+    Bronze,
+    White,
 }
 
 public enum ObjectShape
@@ -109,7 +97,7 @@ public static class ObjectType
                 return "Triangular";
 
             case ObjectShape.TiedUp:
-                return "TiedUp";
+                return "Tied-Up";
 
             case ObjectShape.Wet:
                 return "Wet";
@@ -130,66 +118,40 @@ public static class ObjectType
     {
         switch (color)
         {
-                case ObjectColor.White:
-                    return Color.white;
-                case ObjectColor.Yellow:
-                    return Color.yellow;
-                case ObjectColor.Blue:
-                    return Color.blue;
-                case ObjectColor.Red:
-                    return Color.red;
-                case ObjectColor.Green:
-                    return Color.green;
-                case ObjectColor.Black:
-                    return Color.black;
-                case ObjectColor.Brown:
-                    return new Color(165/255.0f,42/255.0f,42/255.0f);
-                case ObjectColor.Azure:
-                    return new Color(0/255.0f, 127/255.0f, 255/255.0f);
-                case ObjectColor.Ivory:
-                    return new Color(255/255.0f,255/255.0f,240/255.0f);
-                case ObjectColor.Teal:
-                    return new Color(0/255.0f,128/255.0f,128/255.0f);
-                case ObjectColor.Purple:
-                    return new Color(128/255.0f,0/255.0f,128/255.0f);
-                case ObjectColor.NavyBlue:
-                    return new Color(0/255.0f,0/255.0f,128/255.0f);
-                case ObjectColor.PeaGreen:
-                    return new Color(115/255.0f,145/255.0f,34/255.0f);
-                case ObjectColor.Gray:
-                    return Color.gray;
-                case ObjectColor.Orange:
-                    return new Color(255/255.0f,165/255.0f,0/255.0f);
-                case ObjectColor.Maroon:
-                    return new Color(128/255.0f,0/255.0f,0/255.0f);
-                case ObjectColor.Charcoal:
-                    return new Color(54/255.0f, 69/255.0f, 79/255.0f);
-                case ObjectColor.Aquamarine:
-                    return new Color(127/255.0f, 255/255.0f, 21/255.0f);
-                case ObjectColor.Coral:
-                    return new Color(255/255.0f,127/255.0f,80/255.0f);
-                case ObjectColor.Fuchsia:
-                    return new Color(255/255.0f,0/255.0f,255/255.0f);
-                case ObjectColor.Wheat:
-                    return new Color(245/255.0f, 222/255.0f, 179/255.0f);
-                case ObjectColor.Lime:
-                    return new Color(191/255.0f, 255/255.0f, 0/255.0f);
-                case ObjectColor.Crimson:
-                    return new Color(220/255.0f, 20/255.0f, 60/255.0f);
-                case ObjectColor.Khaki:
-                    return new Color(76/255.0f, 69/255.0f, 56/255.0f);
-                case ObjectColor.Pink:
-                    return new Color(219/255.0f,112/255.0f,147/255.0f);
-                case ObjectColor.HotPink:
-                    return new Color(255/255.0f,105/255.0f,180/255.0f);
-                case ObjectColor.Magenta:
-                    return new Color(255/255.0f,0/255.0f,255/255.0f);
-                case ObjectColor.Plum:
-                    return new Color(221/255.0f,160/255.0f,221/255.0f);
-                case ObjectColor.Olive:
-                    return new Color(128/255.0f,128/255.0f,0/255.0f);
-                case ObjectColor.Cyan:
-                    return new Color(0/255.0f,255/255.0f,255/255.0f);
+case ObjectColor.Apple:
+                    return new Color(0.9f,0.23f,0.25f);
+case ObjectColor.Raspberry:
+                    return new Color(0.98f,0.38f,0.38f);
+case ObjectColor.Bubblegum:
+                    return new Color(0.96f,0.64f,0.9f);
+case ObjectColor.Lavender:
+                    return new Color(0.8f,0.59f,0.98f);
+case ObjectColor.Plum:
+                    return new Color(0.61f,0.41f,0.92f);
+case ObjectColor.Saphire:
+                    return new Color(0.32f,0.5f,0.93f);
+case ObjectColor.Azure:
+                    return new Color(0.22f,0.68f,0.96f);
+case ObjectColor.Sky:
+                    return new Color(0.4f,0.89f,0.99f);
+case ObjectColor.Aquamarine:
+                    return new Color(0.49f,1f,0.88f);
+case ObjectColor.Emerald:
+                    return new Color(0.15f,0.96f,0.53f);
+case ObjectColor.Forest:
+                    return new Color(0.53f,0.9f,0.3f);
+case ObjectColor.Lime:
+                    return new Color(0.77f,1f,0.56f);
+case ObjectColor.Lemon :
+                    return new Color(1f,1f,0.56f);
+case ObjectColor.Mustard:
+                    return new Color(0.99f,0.79f,0.33f);
+case ObjectColor.Apricot:
+                    return new Color(1f,0.62f,0.14f);
+case ObjectColor.Bronze:
+                    return new Color(0.81f,0.41f,0.32f);
+case ObjectColor.White:
+                    return new Color(1f,1f,1f);
             default:
                 Debug.LogError("Not Supposed to fall here " + color);
                 return Color.white;
@@ -200,70 +162,54 @@ public static class ObjectType
     {
         switch (color)
         {
-                case ObjectColor.White:
-                    return "White";
-                case ObjectColor.Yellow:
-                    return "Yellow";
-                case ObjectColor.Blue:
-                    return "Blue";
-                case ObjectColor.Red:
-                    return "Red";
-                case ObjectColor.Green:
-                    return "Green";
-                case ObjectColor.Black:
-                    return "Black";
-                case ObjectColor.Brown:
-                    return "Brown";
-                case ObjectColor.Azure:
-                    return "Azure";
-                case ObjectColor.Ivory:
-                    return "Ivory";
-                case ObjectColor.Teal:
-                    return "Teal";
-                case ObjectColor.Purple:
-                    return "Purple";
-                case ObjectColor.NavyBlue:
-                    return "Navy Blue";
-                case ObjectColor.PeaGreen:
-                    return "Pea Green";
-                case ObjectColor.Gray:
-                    return "Gray";
-                case ObjectColor.Orange:
-                    return "Orange";
-                case ObjectColor.Maroon:
-                    return "Maroon";
-                case ObjectColor.Charcoal:
-                    return "Charcoal";
-                case ObjectColor.Aquamarine:
-                    return "Aquamarine";
-                case ObjectColor.Coral:
-                    return "Coral";
-                case ObjectColor.Fuchsia:
-                    return "Fuchsia";
-                case ObjectColor.Wheat:
-                    return "Wheat";
-                case ObjectColor.Lime:
-                    return "Lime";
-                case ObjectColor.Crimson:
-                    return "Crimson";
-                case ObjectColor.Khaki:
-                    return "Khaki";
-                case ObjectColor.Pink:
-                    return "Pink";
-                case ObjectColor.HotPink:
-                    return "HotPink";
-                case ObjectColor.Magenta:
-                    return "Magenta";
-                case ObjectColor.Plum:
-                    return "Plum";
-                case ObjectColor.Olive:
-                    return "Olive";
-                case ObjectColor.Cyan:
-                    return "Cyan";
+            case ObjectColor.Apple:
+                            return "Apple";
+            case ObjectColor.Raspberry:
+                            return "Raspberry";
+            case ObjectColor.Bubblegum:
+                            return "Bubblegum";
+            case ObjectColor.Lavender:
+                            return "Lavender";
+            case ObjectColor.Plum:
+                            return "Plum";
+            case ObjectColor.Saphire:
+                            return "Saphire";
+            case ObjectColor.Azure:
+                            return "Azure";
+            case ObjectColor.Sky:
+                            return "Sky";
+            case ObjectColor.Aquamarine:
+                            return "Aquamarine";
+            case ObjectColor.Emerald:
+                            return "Emerald";
+            case ObjectColor.Forest:
+                            return "Forest";
+            case ObjectColor.Lime:
+                            return "Lime";
+            case ObjectColor.Lemon :
+                            return "Lemon";
+            case ObjectColor.Mustard:
+                            return "Mustard";
+            case ObjectColor.Apricot:
+                            return "Apricot";
+            case ObjectColor.Bronze:
+                            return "Bronze";
+            case ObjectColor.White:
+                            return "White";
             default:
                 Debug.LogError("Not Supposed to fall here " + color);
                 return "White";
         }
+    }
+
+    public static HashSet<ObjectColor> GetAllColors()
+    {
+        return UnityEngineUtils.GetEnumHash<ObjectColor>();
+    }
+
+    public static HashSet<ObjectShape> GetAllShapes()
+    {
+        return UnityEngineUtils.GetEnumHash<ObjectShape>();
     }
 }
 

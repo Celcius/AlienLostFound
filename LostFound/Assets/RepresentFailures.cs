@@ -21,10 +21,20 @@ public class RepresentFailures : MonoBehaviour
     [SerializeField]
     private GameController controller;
 
+    private bool hasStarted = false;
+
     void Start()
     {
         failures.OnChange += OnFailuresChange;
-        OnFailuresChange(0, failures.Value);
+    }
+
+    private void Update() 
+    {
+        if(!hasStarted)
+        {
+            OnFailuresChange(0, failures.Value);
+            hasStarted = true;
+        }
     }
 
     private void OnDestroy() 

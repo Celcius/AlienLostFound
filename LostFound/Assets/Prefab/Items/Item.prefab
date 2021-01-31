@@ -55,7 +55,7 @@ MonoBehaviour:
   sprites:
   - {fileID: 602643600620238468}
   - {fileID: 3641140482619760247}
-  colors: 1d00000019000000
+  colors: 
   shapes: 0900000001000000
 --- !u!114 &620095981248854633
 MonoBehaviour:

@@ -186,7 +186,7 @@ MonoBehaviour:
   talkFace: {fileID: 21300000, guid: 02e24c0658ed4c04189a0ef5a3bef43c, type: 3}
   shockFace: {fileID: 21300000, guid: b75e709da60a3484c8745d12a7557f73, type: 3}
   face: {fileID: 7418589203326240365}
-  angerPerSecond: 0.02
+  angerPerSecond: 0.03
   angerPerQuestion: 0.2
   anim: {fileID: 8244765006340216038}
   soundSystem: {fileID: 11400000, guid: 63184ffd1511ef74580e5a8ec76706c3, type: 2}
@@ -206,7 +206,7 @@ MonoBehaviour:
   - My {0}, {1} and {2} is like tots' gone
   - It's like totally {0}, tots' {2} and like {1}...
   - '{2} and like {0} and like {1} yeaah!?'
-  - ' I''m so sure {2} and {0}! Oh and  maaaaybe {1}'
+  - ' I''m so sure {2} and {0}! Oh and maaaaybe {1}'
   happyTexts:
   - Oh My GLORB! YASSSSSS!
   - MYYY BAAAABYYYYY!!!!!
@@ -215,7 +215,7 @@ MonoBehaviour:
   - Whatever, baaaiiiiiii
   - Bitchin'
   angryTexts:
-  - NO! GRODY!
+  - 'GRODY! EWWW! '
   - This is so not what i asked!
   - NO! I want your manager!
   - URGH! Seriously!?

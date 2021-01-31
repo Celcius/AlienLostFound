@@ -88,6 +88,8 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private GameObject shutterObject;
 
+    private IEnumerator decreaseAnger = null;
+
     private void Start() 
     {
         itemPrefabs.Reset();
@@ -152,7 +154,7 @@ public class GameController : MonoBehaviour
 
     private void GenerateColors(GrabbableItem[] items)
     {
-        RandomColorGeneration(items);
+        RandomColorNoRepeatGeneration(items);
     }
 
     private void RandomColorGeneration(GrabbableItem[] items)
@@ -169,6 +171,32 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void RandomColorNoRepeatGeneration(GrabbableItem[] items)
+    {
+        HashSet<ObjectColor> currentColors = new HashSet<ObjectColor>();
+        foreach(GrabbableItem item in items)
+        {
+            ObjectColor[] colors = new ObjectColor[item.SpriteCount];
+            currentColors.Clear();
+
+            for(int i = 0; i < colors.Length; i++)
+            {
+                ObjectColor color;
+
+                do 
+                {
+                    color = UnityEngineUtils.GetRandomEnumElement<ObjectColor>();
+                }
+                while(currentColors.Contains(color));
+
+                colors[i] = color;
+                currentColors.Add(color);
+            }
+            item.SetColors(colors);
+        }
+    }
+
+
 
     public void DeliverItem()
     { 
@@ -184,8 +212,8 @@ public class GameController : MonoBehaviour
         }
         else if(delivery.ContainsSimilar(chosenItem.Value))
         {
-            SetTranslatorString(currentAlien.GetHappyText());
             AnimateAlienLeave(Alien.AlienAnimations.LeaveHappy);
+            SetTranslatorString(currentAlien.GetHappyText());
             successes.Value++;
             Debug.Log("Success");
         }
@@ -215,6 +243,7 @@ public class GameController : MonoBehaviour
 
     private void AnimateAlienLeave(Alien.AlienAnimations animType)
     {
+        DecreaseAnger();
         SetTranslatorString("");
         switch(animType)
         {
@@ -236,9 +265,39 @@ public class GameController : MonoBehaviour
         currentAlien.Animate(animType,
             () =>
             {
-                SetTranslatorString("");
+                if(!dayEnded)
+                {
+                   
+                }
+                
                 NextAlien();
             });
+    }
+
+    private void DecreaseAnger()
+    {
+        if(decreaseAnger != null)
+        {
+            StopCoroutine(decreaseAnger);
+        }
+        decreaseAnger = DecreaseAngerRoutine();
+        StartCoroutine(decreaseAnger);
+    }
+
+    private IEnumerator DecreaseAngerRoutine()
+    {
+        const float timeToDecrease = 1.2f;
+        float startAnger = angerBar.Value;
+        float delta = startAnger/timeToDecrease;
+
+        while(angerBar.Value > 0)
+        {
+            yield return new WaitForEndOfFrame();
+            angerBar.Value -= delta * Time.deltaTime;
+        }
+
+        decreaseAnger = null;
+        angerBar.Value = 0;
     }
 
     private void SetTranslatorString(string newStr)
@@ -340,8 +399,8 @@ public class GameController : MonoBehaviour
 
     private IEnumerator WaitForTime()
     {
-        yield return new WaitForSeconds(10.0f);
-        SceneManager.LoadScene(0, LoadSceneMode.Single);
+        yield return new WaitForSeconds(7.0f);
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 
     private void GenerateTranslatorString()
@@ -408,24 +467,30 @@ public class GameController : MonoBehaviour
 
     private string GenerateFakeString()
     {
-        HashSet<ObjectShape> allShapes = new HashSet<ObjectShape>();
-        HashSet<ObjectColor> allColors = new HashSet<ObjectColor>();
-        
+        HashSet<ObjectShape> allShapes = ObjectType.GetAllShapes();
+        HashSet<ObjectColor> allColors = ObjectType.GetAllColors();
+
+        HashSet<ObjectShape> currentShapes = new HashSet<ObjectShape>();
+        HashSet<ObjectColor> currentColors = new HashSet<ObjectColor>();
+
+
         foreach(GrabbableItem item in instantiatedItems.Value)
         {
             foreach(ObjectShape shape in item.shapes)
             {
-                allShapes.Add(shape);
+                currentShapes.Add(shape);
+                allShapes.Remove(shape);
             }
 
             foreach(ObjectColor color in item.colors)
             {
-                allColors.Add(color);
+                currentColors.Add(color);
+                allColors.Remove(color);
             }    
         }
 
-        List<ObjectShape> finalShapes = new List<ObjectShape>(allShapes);
-        List<ObjectColor> finalColors = new List<ObjectColor>(allColors);
+        List<ObjectShape> finalShapes = new List<ObjectShape>(allShapes.Count < 2? currentShapes : allShapes);
+        List<ObjectColor> finalColors = new List<ObjectColor>(allColors.Count < 2? currentColors : allColors);
         
         return CreateItemString(finalShapes.ToArray(), finalColors.ToArray());
 
@@ -471,8 +536,10 @@ public class GameController : MonoBehaviour
 
     private void SpawnSingleObject()
     {
-       CreateObjects(1, new BoxCollider2D[]{respawnArea});
+       GrabbableItem[] created = CreateObjects(1, new BoxCollider2D[]{respawnArea});
        timeToSpawn = Mathf.Max(timeToSpawn*timeToSpawnDecPerc, minTimetoSpawn);
+
+       RandomColorNoRepeatGeneration(created);
     }
 
     private void NextAlien()
@@ -488,6 +555,7 @@ public class GameController : MonoBehaviour
         currentAlien.Animate(Alien.AlienAnimations.MoveToFront,
             () =>
             {
+                SetTranslatorString("");
                 ChooseNextItem();
                 angerBar.Value = 0;
                 currentAlien.Animate(Alien.AlienAnimations.Talk, 
